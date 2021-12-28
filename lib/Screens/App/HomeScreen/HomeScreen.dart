@@ -1,24 +1,19 @@
-// import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:ausmart/Commons/TextStyles.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geocoder/geocoder.dart';
-import 'package:geocoder/model.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:ausmart/Commons/AppConstants.dart';
 import 'package:ausmart/Commons/ColorConstants.dart';
 import 'package:ausmart/Commons/SnackBar.dart';
-import 'package:ausmart/Commons/TextStyles.dart';
 import 'package:ausmart/Commons/zerostate.dart';
 import 'package:ausmart/Components/ActiveMessageCard.dart';
 import 'package:ausmart/Components/BannerCard.dart';
 import 'package:ausmart/Components/CartBottomCard.dart';
-import 'package:ausmart/Models/StoreModel.dart';
 import 'package:ausmart/Providers/GetDataProvider.dart';
 import 'package:ausmart/Providers/GroceryProvider.dart';
 import 'package:ausmart/Providers/PopularProvider.dart';
 import 'package:ausmart/Providers/StoreProvider.dart';
-import 'package:ausmart/Screens/App/HomeScreen/BottomNav.dart';
 import 'package:ausmart/Screens/App/HomeScreen/CategoryScreen.dart';
 import 'package:ausmart/Screens/App/HomeScreen/NearbyScreen.dart';
 import 'package:ausmart/Screens/App/HomeScreen/PopularScreen.dart';
@@ -26,9 +21,6 @@ import 'package:ausmart/Screens/App/HomeScreen/QuickScreen.dart';
 import 'package:ausmart/Screens/App/HomeScreen/RecommendedScreen.dart';
 import 'package:provider/provider.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:socket_io_client/socket_io_client.dart' as IO;
-
-import '../saved_address.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key key}) : super(key: key);
@@ -238,337 +230,144 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kWhiteColor,
-      // appBar: new AppBar(
-      //   shape: RoundedRectangleBorder(
-      //     borderRadius: BorderRadius.vertical(
-      //       bottom: Radius.circular(32.0),
-      //     ),
-      //   ),
-      //   backgroundColor: kPinkColor,
-      //   elevation: 1,
-      //   centerTitle: true,
-      //   automaticallyImplyLeading: false,
-      //   // leading: Padding(
-      //   //   padding: const EdgeInsets.all(8.0),
-      //   //   child: Icon(Icons.menu),
-      //   // ),
-      //   title: SvgPicture.asset(
-      //     "assets/svg/logowhite.svg",
-      //     height: 20,
-      //   ),
-      //   actions: <Widget>[
-      //     new Padding(
-      //       padding: const EdgeInsets.all(10.0),
-      //       child: new Container(
-      //         height: 150.0,
-      //         width: 30.0,
-      //         child: new IconButton(
-      //           icon: new Icon(
-      //             Icons.notifications_active_outlined,
-      //             color: kWhiteColor,
-      //           ),
-      //           onPressed: null,
-      //         ),
-      //       ),
-      //     ),
-      //   ],
-      //   bottom: PreferredSize(
-      //     preferredSize: Size.fromHeight(120),
-      //     child: Column(
-      //       children: [
-      //         GestureDetector(
-      //           onTap: () {
-      //             Navigator.push(
-      //               context,
-      //               MaterialPageRoute(
-      //                 builder: (context) => BottomNavigation(
-      //                   index: 1,
-      //                 ),
-      //               ),
-      //             );
-      //           },
-      //           child: Padding(
-      //             padding: const EdgeInsets.fromLTRB(18, 0, 18, 8),
-      //             child: Container(
-      //               padding: EdgeInsets.all(15),
-      //               decoration: BoxDecoration(
-      //                 borderRadius: BorderRadius.circular(15),
-      //                 color: Colors.white,
-      //               ),
-      //               child: Row(
-      //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //                 children: [
-      //                   Text(
-      //                     'Search for hotels and dishes',
-      //                     style: kTextgrey,
-      //                   ),
-      //                   Icon(
-      //                     Icons.search,
-      //                     size: 20,
-      //                     color: kGreyLight,
-      //                   ),
-      //                 ],
-      //               ),
-      //             ),
-      //           ),
-      //         ),
-      //         Padding(
-      //           padding: const EdgeInsets.symmetric(horizontal: 50),
-      //           child: SizedBox(
-      //             height: 50,
-      //             child: Padding(
-      //               padding: const EdgeInsets.symmetric(
-      //                   horizontal: 10, vertical: 10),
-      //               child: Consumer<GetDataProvider>(
-      //                 builder: (context, details, child) => GestureDetector(
-      //                   onTap: () {
-      //                     Navigator.push(
-      //                       context,
-      //                       MaterialPageRoute(
-      //                         builder: (context) => MapAddress(),
-      //                       ),
-      //                     );
-      //                   },
-      //                   child: Row(
-      //                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      //                     children: [
-      //                       Icon(
-      //                         Icons.location_on,
-      //                         color: Colors.white,
-      //                       ),
-      //                       SizedBox(width: 8,),
-      //                       Expanded(
-      //                         child: Container(
-      //                           child: Text(
-      //                             details.fullAddress,
-      //                             style: TextStyle(
-      //                               fontFamily: PrimaryFontName,
-      //                               fontWeight: FontWeight.w400,
-      //                               color: Colors.white,
-      //                               fontSize: 12,
-      //                             ),
-      //                             maxLines: 1,
-      //                             overflow: TextOverflow.ellipsis,
-      //                           ),
-      //                         ),
-      //                       ),
-      //                       // SizedBox(width: 20,),
-      //                       Icon(
-      //                         Icons.arrow_drop_down,color: Colors.white,
-      //                       )
-      //                     ],
-      //                   ),
-      //                 ),
-      //               ),
-      //             ),
-      //           ),
-      //         ),
-      //       ],
-      //     ),
-      //   ),
-      // ),
+      appBar: new AppBar(
+        backgroundColor: kWhiteColor,
+        elevation: 0,
+        centerTitle: false,
+        automaticallyImplyLeading: false,
+        // leading: Padding(
+        //   padding: const EdgeInsets.all(8.0),
+        //   child: Icon(Icons.menu),
+        // ),
+        title: Image.asset(
+          "assets/images/ausmart.png",
+          height: 40,
+        ),
+
+        actions: <Widget>[
+          new IconButton(
+            icon: new Icon(
+              Icons.call,
+              color: kBlackColor,
+            ),
+            onPressed: null,
+          ),
+        ],
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(40),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: Container(
+              height: 40,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                color: Color(0xFF09910F),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Icon(
+                      Icons.location_on,
+                      color: kWhiteColor,
+                      size: 20,
+                    ),
+                  ),
+                  Text(
+                    "Enter your Location",
+                    style: kText12white,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
       bottomNavigationBar: cartBottomCard(),
       body: Consumer<StoreProvider>(
-        builder: (context, data, child) => NestedScrollView(
-            headerSliverBuilder:
-                (BuildContext context, bool innerBoxIsScrolled) {
-              return [
-                // SliverAppBar(
-                //   shape: RoundedRectangleBorder(
-                //     borderRadius: BorderRadius.vertical(
-                //       bottom: Radius.circular(22.0),
-                //     ),
-                //   ),
-                //   automaticallyImplyLeading: false,
-                //   actions: <Widget>[
-                //     new Padding(
-                //       padding: const EdgeInsets.only(
-                //           left: 10.0, right: 18.0, bottom: 10.0, top: 10.0),
-                //       child: new Container(
-                //         height: 150.0,
-                //         width: 30.0,
-                //         child: new IconButton(
-                //           icon: new Icon(
-                //             Icons.notifications_active_outlined,
-                //             color: kWhiteColor,
-                //           ),
-                //           onPressed: null,
-                //         ),
-                //       ),
-                //     ),
-                //   ],
-                //   backgroundColor: kPinkColor,
-                //   elevation: 1,
-                //   title: SvgPicture.asset(
-                //     "assets/svg/logowhite.svg",
-                //     height: 20,
-                //   ),
-                //   centerTitle: true,
-                //   pinned: true,
-                //   expandedHeight: 180,
-                //   floating: false,
-                //   flexibleSpace: FlexibleSpaceBar(
-                //     background: Column(
-                //       children: [
-                //         SizedBox(
-                //           height: 90,
-                //         ),
-                //         Column(
-                //           children: [
-                //             GestureDetector(
-                //               onTap: () {
-                //                 Navigator.push(
-                //                   context,
-                //                   MaterialPageRoute(
-                //                     builder: (context) => BottomNavigation(
-                //                       index: 1,
-                //                     ),
-                //                   ),
-                //                 );
-                //               },
-                //               child: Padding(
-                //                 padding:
-                //                     const EdgeInsets.fromLTRB(18, 0, 18, 8),
-                //                 child: Container(
-                //                   padding: EdgeInsets.all(15),
-                //                   decoration: BoxDecoration(
-                //                     borderRadius: BorderRadius.circular(15),
-                //                     color: Colors.white,
-                //                   ),
-                //                   child: Row(
-                //                     mainAxisAlignment:
-                //                         MainAxisAlignment.spaceBetween,
-                //                     children: [
-                //                       Text(
-                //                         'Search for hotels and dishes',
-                //                         style: kTextgrey,
-                //                       ),
-                //                       Icon(
-                //                         Icons.search,
-                //                         size: 20,
-                //                         color: kGreyLight,
-                //                       ),
-                //                     ],
-                //                   ),
-                //                 ),
-                //               ),
-                //             ),
-                //             Padding(
-                //               padding:
-                //                   const EdgeInsets.symmetric(horizontal: 50),
-                //               child: SizedBox(
-                //                 height: 50,
-                //                 child: Padding(
-                //                   padding: const EdgeInsets.symmetric(
-                //                       horizontal: 10, vertical: 10),
-                //                   child: Consumer<GetDataProvider>(
-                //                     builder: (context, details, child) =>
-                //                         GestureDetector(
-                //                       onTap: () {
-                //                         Navigator.push(
-                //                           context,
-                //                           MaterialPageRoute(
-                //                             builder: (context) => SavedPage(),
-                //                           ),
-                //                         );
-                //                       },
-                //                       child: Row(
-                //                         mainAxisAlignment:
-                //                             MainAxisAlignment.spaceEvenly,
-                //                         children: [
-                //                           Icon(
-                //                             Icons.location_on,
-                //                             color: Colors.white,
-                //                           ),
-                //                           SizedBox(
-                //                             width: 8,
-                //                           ),
-                //                           Expanded(
-                //                             child: Container(
-                //                               child: Text(
-                //                                 details.fullAddress,
-                //                                 style: TextStyle(
-                //                                   fontFamily: PrimaryFontName,
-                //                                   fontWeight: FontWeight.w400,
-                //                                   color: Colors.white,
-                //                                   fontSize: 12,
-                //                                 ),
-                //                                 maxLines: 1,
-                //                                 overflow: TextOverflow.ellipsis,
-                //                               ),
-                //                             ),
-                //                           ),
-                //                           // SizedBox(width: 20,),
-                //                           Icon(
-                //                             Icons.arrow_drop_down,
-                //                             color: Colors.white,
-                //                           )
-                //                         ],
-                //                       ),
-                //                     ),
-                //                   ),
-                //                 ),
-                //               ),
-                //             ),
-                //           ],
-                //         ),
-                //       ],
-                //     ),
-                //   ),
-                // ),
-              ];
-            },
-            body: RefreshIndicator(
-              backgroundColor: Colors.white,
-              onRefresh: () => _refreshStores(),
-              child: data.isServicable
-                  ? SingleChildScrollView(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            height: 20,
+        builder: (context, data, child) => RefreshIndicator(
+          backgroundColor: Colors.white,
+          onRefresh: () => _refreshStores(),
+          child: data.isServicable
+              ? SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.white,
                           ),
-                          QuickScreen(),
-                          SizedBox(
-                            height: 20,
+                          child: TextField(
+                            // controller: searchController,
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.only(left: 10),
+                              suffixIcon: Icon(
+                                Icons.search,
+                                color: kGreyLight,
+                              ),
+                              filled: true,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                      width: 0, style: BorderStyle.none)),
+                              hintText: 'Search for restaurents and food',
+                              hintStyle: kTextgrey,
+                            ),
                           ),
-                          MessageCard(data: data.store.branch?.activeMessage),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          PopularScreen(),
-                          BannerScreen(),
-                          SizedBox(
-                            height: 18,
-                          ),
-                          CategoryScreen(),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          RecommendedScreen(),
-                          SizedBox(
-                            height: 14,
-                          ),
-                          NearbyScreen(),
-                        ],
-                      ),
-                    )
-                  : data.errorCode == 100
-                      ? zerostate(
-                          size: 220,
-                          icon: 'assets/svg/noavailable.svg',
-                          head: 'Wish We Were Here!',
-                          sub: "We don't currently deliver here yet.",
-                        )
-                      : zerostate(
-                          size: 140,
-                          icon: 'assets/svg/noservice.svg',
-                          head: 'Dang!',
-                          sub: "We are currently under maintenance",
                         ),
-            )),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      PopularScreen(),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      QuickScreen(),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      MessageCard(data: data.store.branch?.activeMessage),
+                      SizedBox(
+                        height: 20,
+                      ),
+
+                      BannerScreen(),
+                      SizedBox(
+                        height: 18,
+                      ),
+                      CategoryScreen(),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      // RecommendedScreen(),
+                      SizedBox(
+                        height: 14,
+                      ),
+                      NearbyScreen(),
+                    ],
+                  ),
+                )
+              : data.errorCode == 100
+                  ? zerostate(
+                      size: 220,
+                      icon: 'assets/svg/noavailable.svg',
+                      head: 'Wish We Were Here!',
+                      sub: "We don't currently deliver here yet.",
+                    )
+                  : zerostate(
+                      size: 140,
+                      icon: 'assets/svg/noservice.svg',
+                      head: 'Dang!',
+                      sub: "We are currently under maintenance",
+                    ),
+        ),
       ),
     );
   }

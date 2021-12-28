@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:ausmart/Commons/ColorConstants.dart';
 import 'package:ausmart/Commons/SnackBar.dart';
@@ -10,6 +9,7 @@ import 'package:ausmart/Screens/App/Cart/CheckoutScreen.dart';
 import 'package:ausmart/Screens/App/ModalBottomsheets/PromoModal.dart';
 import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class CartScreen extends StatefulWidget {
   bool back = false;
   CartScreen({Key key, this.back}) : super(key: key);
@@ -143,9 +143,12 @@ class _CartScreenState extends State<CartScreen> {
                                         data.store["name"],
                                         style: kNavBarTitle1,
                                       ),
-                                      Text(
-                                        data.store["location"],
-                                        style: kTextgrey,
+                                      Container(
+                                        width: 250,
+                                        child: Text(
+                                          data.store["location"],
+                                          style: kTextgrey,
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -602,24 +605,14 @@ class _CartScreenState extends State<CartScreen> {
                       ),
                       child: ElevatedButton(
                         onPressed: () {
-                          getcartmodel.cart
-                                      .map(
-                                          (item) => item["price"] * item["qty"])
-                                      .fold(
-                                          0, (prev, amount) => prev + amount) >=
-                                  data.store["minimumOrderValue"]
-                              ? Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => CheckoutScreen(
-                                      tip: value,
-                                    ),
-                                  ),
-                                )
-                              : showSnackBar(
-                                  message:
-                                      "You have to order minimum amount of ${data.store["minimumOrderValue"]}",
-                                  context: context);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => CheckoutScreen(
+                                tip: value,
+                              ),
+                            ),
+                          );
                         },
                         style: ElevatedButton.styleFrom(
                           primary: kPinkColor,

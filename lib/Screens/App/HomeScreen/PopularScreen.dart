@@ -12,25 +12,6 @@ class PopularScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: RichText(
-            textAlign: TextAlign.justify,
-            text: TextSpan(
-              text: "Popular",
-              style: TextHeadGrey,
-              children: <TextSpan>[
-                TextSpan(
-                  text: "\tFoods",
-                  style: TextHeadGrey,
-                ),
-              ],
-            ),
-          ),
-        ),
-        SizedBox(
-          height: 10,
-        ),
         Consumer<PopularProvider>(
           builder: (context, data, child) => data.loading
               ? categoryShimmer()
@@ -40,7 +21,7 @@ class PopularScreen extends StatelessWidget {
                       head: 'Sorry!',
                       sub: 'No Restaurant is found')
                   : Container(
-                      height: 220,
+                      height: 100,
                       child: MediaQuery.removePadding(
                         context: context,
                         removeTop: true,

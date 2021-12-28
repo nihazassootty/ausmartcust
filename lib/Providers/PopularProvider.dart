@@ -24,7 +24,6 @@ class PopularProvider extends ChangeNotifier {
         'Accept': 'application/json',
       });
       var data = jsonDecode(response.body);
-
       if (response.statusCode == 200) {
         category = PopularModel.fromJson(data);
         loading = false;

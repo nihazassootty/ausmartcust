@@ -188,7 +188,7 @@ class _PromoModalState extends State<PromoModal> {
                     ? zerostate(
                         size: 100,
                         height: 200,
-                        icon: 'assets/svg/no-message.svg',
+                        icon: 'assets/svg/noavailable.svg',
                         head: 'No Coupons Yet!',
                         sub: 'Currently You Do Not Have Any Active Coupons!',
                       )

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:ausmart/Commons/ColorConstants.dart';
 
 const String PrimaryFontName = 'Proxima Nova Font';
@@ -52,6 +51,7 @@ TextStyle kTextblock = TextStyle(
   color: Colors.grey[600],
   fontSize: 18,
 );
+// ignore: non_constant_identifier_names
 TextStyle KReason = TextStyle(
   fontFamily: PrimaryFontName,
   // fontWeight: FontWeight.w500,

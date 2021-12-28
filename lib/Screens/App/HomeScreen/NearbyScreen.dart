@@ -54,7 +54,7 @@ class NearbyScreen extends StatelessWidget {
                           itemBuilder: (context, int index) {
                             if (index == getstore.store.restaurant.length) {
                               return Offstage(
-                                offstage: getstore.isPagination,
+                                offstage: getstore.isPagination == false,
                                 child: CupertinoActivityIndicator(),
                               );
                             }

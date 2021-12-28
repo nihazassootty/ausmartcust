@@ -13,7 +13,7 @@ Widget nearrestaurantShimmer() {
             itemCount: 4,
             itemBuilder: (context, int index) {
               return Container(
-                height: 140,
+                height: 120,
                 margin: EdgeInsets.symmetric(vertical: 7, horizontal: 10),
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(

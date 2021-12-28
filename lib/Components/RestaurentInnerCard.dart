@@ -53,26 +53,27 @@ Widget restaurentInnercard({
                     SizedBox(
                       width: 8,
                     ),
-                    item.bestSeller
-                        ? Row(
-                            children: [
-                              Icon(
-                                Icons.star,
-                                size: 18,
-                                color: Colors.yellow[800],
-                              ),
-                              Text(
-                                "Best Selling",
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontFamily: 'Proxima Nova Font',
-                                  color: Colors.yellow[800],
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              )
-                            ],
-                          )
-                        : Container()
+                    // item.bestSeller
+                    // ?
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.star,
+                          size: 18,
+                          color: Colors.yellow[800],
+                        ),
+                        Text(
+                          "Best Selling",
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontFamily: 'Proxima Nova Font',
+                            color: Colors.yellow[800],
+                            fontWeight: FontWeight.w500,
+                          ),
+                        )
+                      ],
+                    )
+                    // : Container()
                   ],
                 ),
                 SizedBox(

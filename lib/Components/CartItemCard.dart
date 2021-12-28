@@ -37,7 +37,7 @@ Widget cartItemCard({item, context}) {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
-            width: 180,
+            width: 160,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -48,30 +48,30 @@ Widget cartItemCard({item, context}) {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
-                SizedBox(
-                  height: 5,
-                ),
-                item["showAddon"] == true
-                    ? item["addons"].length > 0
-                        ? Wrap(
-                            children: [
-                              ...addons.map((e) => Text(
-                                    e.name + ",",
-                                    style: TextStyle(
-                                        color: Colors.grey, fontSize: 12),
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                  )),
-                            ],
-                          )
-                        : Container(
-                            child: Visibility(
-                                visible: false, child: Text("No addons")),
-                          )
-                    : Container(
-                        child: Visibility(
-                            visible: false, child: Text("No addons")),
-                      ),
+                // SizedBox(
+                //   height: 5,
+                // ),
+                // item["showAddon"] == true
+                //     ? item["addons"].length > 0
+                //         ? Wrap(
+                //             children: [
+                //               ...addons.map((e) => Text(
+                //                     e.name + ",",
+                //                     style: TextStyle(
+                //                         color: Colors.grey, fontSize: 12),
+                //                     maxLines: 1,
+                //                     overflow: TextOverflow.ellipsis,
+                //                   )),
+                //             ],
+                //           )
+                //         : Container(
+                //             child: Visibility(
+                //                 visible: false, child: Text("No addons")),
+                //           )
+                //     : Container(
+                //         child: Visibility(
+                //             visible: false, child: Text("No addons")),
+                //       ),
               ],
             ),
           ),

@@ -4,7 +4,6 @@ import 'package:ausmart/Commons/ColorConstants.dart';
 import 'package:ausmart/Commons/TextStyles.dart';
 import 'package:ausmart/Providers/CartProvider.dart';
 import 'package:ausmart/Screens/App/Cart/CartScreen.dart';
-import 'package:ausmart/Screens/App/HomeScreen/BottomNav.dart';
 import 'package:provider/provider.dart';
 
 Widget cartBottomCard({String name, onTap}) {

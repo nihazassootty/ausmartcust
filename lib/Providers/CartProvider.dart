@@ -22,14 +22,14 @@ class CartProvider extends ChangeNotifier {
 
     notifyListeners();
   }
+
   addItemAddon({item, storeDetail}) {
     //* SET STORE NAME
     if (store.isEmpty) {
       store = storeDetail;
     }
 
-
-      cart.add(item);
+    cart.add(item);
     notifyListeners();
   }
 
