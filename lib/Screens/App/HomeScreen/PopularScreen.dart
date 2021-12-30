@@ -20,29 +20,29 @@ class PopularScreen extends StatelessWidget {
                       icon: 'assets/svg/norestaurant.svg',
                       head: 'Sorry!',
                       sub: 'No Restaurant is found')
-                  : Container(
-                      height: 100,
-                      child: MediaQuery.removePadding(
-                        context: context,
-                        removeTop: true,
-                        child: GridView.builder(
-                          shrinkWrap: true,
-                          itemCount: data.category.count,
-                          physics: NeverScrollableScrollPhysics(),
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                  mainAxisSpacing: 10,
-                                  crossAxisSpacing: 4,
-                                  crossAxisCount: 4),
-                          itemBuilder: (BuildContext context, int index) {
-                            return Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: popularCard(
+                  : Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: Container(
+                        height: 100,
+                        child: MediaQuery.removePadding(
+                          context: context,
+                          removeTop: true,
+                          child: GridView.builder(
+                            shrinkWrap: true,
+                            itemCount: data.category.count,
+                            physics: NeverScrollableScrollPhysics(),
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                                    mainAxisSpacing: 10,
+                                    crossAxisSpacing: 4,
+                                    crossAxisCount: 4),
+                            itemBuilder: (BuildContext context, int index) {
+                              return popularCard(
                                 item: data.category.data[index],
                                 context: context,
-                              ),
-                            );
-                          },
+                              );
+                            },
+                          ),
                         ),
                       ),
                     ),

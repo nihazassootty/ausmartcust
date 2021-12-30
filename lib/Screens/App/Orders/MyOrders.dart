@@ -80,8 +80,8 @@ class _MyOrdersState extends State<MyOrders> {
         'Authorization': 'Bearer $token',
       });
       var data = jsonDecode(response.body);
-
       if (response.statusCode == 200) {
+        print(data);
         setState(() {
           if (data['pagination']['next'] != null) {
             isPagination = true;
@@ -211,6 +211,7 @@ class _MyOrdersState extends State<MyOrders> {
                               child: CupertinoActivityIndicator(),
                             );
                           }
+
                           return myOrdersCard(
                               item: orders[index], context: context);
                         },

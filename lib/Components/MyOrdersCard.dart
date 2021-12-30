@@ -1,3 +1,4 @@
+import 'package:ausmart/Commons/ColorConstants.dart';
 import 'package:flutter/material.dart';
 import 'package:ausmart/Commons/TextStyles.dart';
 import 'package:intl/intl.dart';
@@ -36,109 +37,124 @@ Widget myOrdersCard({BuildContext context, item}) {
                   ),
           ],
         ),
-        child: Padding(
-          padding: EdgeInsets.all(10),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              height: 30,
+              child: Row(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            height: 50,
-                            child: Image.network(
-                              item.vendor.storeLogo.image,
-                            ),
-                          ),
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        // borderRadius: BorderRadius.circular(5),
+                        color: item.orderStatus == 'delivered'
+                            ? Colors.grey[800]
+                            : Colors.green,
+                      ),
+                      child: Center(
+                        child: Text(
+                          item.orderStatus,
+                          style: kText144,
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              item.vendor.name,
-                              style: kNavBarTitle1,
-                              maxLines: 2,
-                            ),
-                            Text(
-                              item.vendor.location.address,
-                              style: kText143,
-                              maxLines: 2,
-                            ),
-                          ],
-                        ),
-                      ],
+                      ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
+                  Expanded(
                     child: Container(
-                      width: 80,
-                      child: Text(
-                        outputDate(item.createdAt),
-                        style: TextStyle(fontWeight: FontWeight.w400),
+                      decoration: BoxDecoration(
+                        // borderRadius: BorderRadius.circular(5),
+                        color: kWhiteColor,
+                      ),
+                      child: Center(
+                        child: Text(
+                          "Order ID: ${item.orderId}",
+                          style: TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w400,
+                            color: kBlackColor,
+                          ),
+                        ),
                       ),
                     ),
                   ),
                 ],
               ),
-              const Divider(
-                height: 15,
-                thickness: 2,
+            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     Padding(
+            //       padding: const EdgeInsets.only(right: 10),
+            //       child: Row(
+            //         children: [
+            //           Padding(
+            //             padding: const EdgeInsets.all(8.0),
+            //             child: Container(
+            //               height: 50,
+            //               child: Image.network(
+            //                 item.vendor.storeLogo.image,
+            //               ),
+            //             ),
+            //           ),
+            //           Column(
+            //             crossAxisAlignment: CrossAxisAlignment.start,
+            //             children: [
+            //               Text(
+            //                 item.vendor.name,
+            //                 style: kNavBarTitle1,
+            //                 maxLines: 2,
+            //               ),
+            // Text(
+            //   item.vendor.location.address,
+            //   style: kText143,
+            //   maxLines: 2,
+            // ),
+            //             ],
+            //           ),
+            //         ],
+            //       ),
+            //     ),
+            //     Padding(
+            //       padding: const EdgeInsets.all(8.0),
+            //       child: Container(
+            //         width: 80,
+            //         child: Text(
+            //           outputDate(item.createdAt),
+            //           style: TextStyle(fontWeight: FontWeight.w400),
+            //         ),
+            //       ),
+            //     ),
+            //   ],
+            // ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+              child: Text(
+                "Order id: ${item.vendor}",
+                style: TextStyle(),
               ),
-              Container(
-                height: 18,
-                width: 80,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: item.orderStatus == 'delivered'
-                      ? Colors.grey[800]
-                      : Colors.green,
-                ),
-                child: Center(
-                  child: Text(
-                    item.orderStatus,
-                    style: kText10white,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    '${item.items.length.toString()}\titems ',
+                    style: TextStyle(fontSize: 12),
                   ),
-                ),
+                  Text(
+                    '₹${item.totalAmount.toString()}',
+                  )
+                ],
               ),
-              SizedBox(
-                height: 5,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 5),
-                child: Text(
-                  "Order id: ${item.orderId}",
-                  style: TextStyle(),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 5),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      '${item.items.length.toString()}\titems ',
-                      style: TextStyle(fontSize: 12),
-                    ),
-                    Text(
-                      '₹${item.totalAmount.toString()}',
-                    )
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 5,
-              ),
-            ],
-          ),
+            ),
+            SizedBox(
+              height: 5,
+            ),
+          ],
         ),
       ),
     ),

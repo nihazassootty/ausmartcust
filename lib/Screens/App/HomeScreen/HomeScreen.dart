@@ -1,4 +1,6 @@
 import 'package:ausmart/Commons/TextStyles.dart';
+import 'package:ausmart/Screens/App/HomeScreen/BottomNav.dart';
+import 'package:ausmart/Screens/App/SearchScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geocoder/geocoder.dart';
@@ -298,26 +300,36 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.white,
-                          ),
-                          child: TextField(
-                            // controller: searchController,
-                            decoration: InputDecoration(
-                              contentPadding: EdgeInsets.only(left: 10),
-                              suffixIcon: Icon(
-                                Icons.search,
-                                color: kGreyLight,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => BottomNavigation(
+                                  index: 1,
+                                ),
                               ),
-                              filled: true,
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide(
-                                      width: 0, style: BorderStyle.none)),
-                              hintText: 'Search for restaurents and food',
-                              hintStyle: kTextgrey,
+                            );
+                          },
+                          child: Container(
+                            padding: EdgeInsets.all(15),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: Colors.grey[100],
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Search for hotels and dishes',
+                                  style: kTextgrey,
+                                ),
+                                Icon(
+                                  Icons.search,
+                                  size: 20,
+                                  color: kGreyLight,
+                                ),
+                              ],
                             ),
                           ),
                         ),
@@ -327,28 +339,27 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       PopularScreen(),
                       SizedBox(
-                        height: 20,
+                        height: 10,
                       ),
                       QuickScreen(),
                       SizedBox(
-                        height: 20,
+                        height: 5,
                       ),
                       MessageCard(data: data.store.branch?.activeMessage),
                       SizedBox(
-                        height: 20,
+                        height: 5,
                       ),
-
                       BannerScreen(),
                       SizedBox(
-                        height: 18,
+                        height: 10,
                       ),
                       CategoryScreen(),
                       SizedBox(
-                        height: 20,
+                        height: 10,
                       ),
                       // RecommendedScreen(),
                       SizedBox(
-                        height: 14,
+                        height: 10,
                       ),
                       NearbyScreen(),
                     ],
