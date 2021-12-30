@@ -1,10 +1,11 @@
+import 'package:ausmart/Screens/App/saved_address.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:ausmart/Commons/ColorConstants.dart';
 import 'package:ausmart/Commons/TextStyles.dart';
 import 'package:ausmart/Components/CartBottomCard.dart';
 import 'package:ausmart/Providers/GetDataProvider.dart';
-import 'package:ausmart/Screens/App/Address.dart';
+import 'package:ausmart/Screens/App/MapScreen.dart';
 import 'package:ausmart/Screens/App/Orders/MyOrders.dart';
 import 'package:ausmart/Screens/AuthFiles/SignUp.dart';
 import 'package:ausmart/Shimmers/nearbydummy.dart';
@@ -118,7 +119,7 @@ class _AccountScreenState extends State<AccountScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => MapScreen(),
+                                  builder: (context) => SavedPage(),
                                 ),
                               );
                             },

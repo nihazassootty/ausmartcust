@@ -13,8 +13,6 @@ import 'package:ausmart/Screens/App/saved_address.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 
-import 'mapSeachScreen.dart';
-
 class MapScreen extends StatefulWidget {
   MapScreen({Key key}) : super(key: key);
 
@@ -183,7 +181,7 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
               child: SvgPicture.asset(
             "assets/svg/gps.svg",
             height: 40,
-            color: kPinkColor,
+            color: Colors.green,
           )),
           Positioned(
             bottom: 0,
@@ -211,10 +209,11 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                     Text(
                       'Select delivery location.',
                       style: TextStyle(
-                          fontSize: 15,
-                          fontFamily: 'Quicksand',
-                          fontWeight: FontWeight.w600,
-                          color: kPinkColor),
+                        fontSize: 15,
+                        fontFamily: 'Quicksand',
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black,
+                      ),
                     ),
                     SizedBox(
                       height: 5,
@@ -227,7 +226,7 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                         children: [
                           SvgPicture.asset(
                             "assets/svg/location.svg",
-                            color: kPinkColor,
+                            color: Colors.green,
                             height: 20,
                           ),
                           SizedBox(
@@ -246,7 +245,7 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                           if (confirm)
                             Container(
                               height: 30,
-                              color: kPinkColor,
+                              color: Colors.green,
                               alignment: Alignment.center,
                               child: TextButton(
                                 child: Text(
@@ -354,7 +353,11 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                                             height: 40,
                                             margin: EdgeInsets.only(right: 10),
                                             decoration: BoxDecoration(
-                                                color: kPinkColor,
+                                                color: kWhiteColor,
+                                                border: Border.all(
+                                                  color: kBlackColor,
+                                                  width: 0.5,
+                                                ),
                                                 borderRadius:
                                                     BorderRadius.circular(5)),
                                             child: Row(
@@ -366,7 +369,7 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                                                     child: SvgPicture.asset(
                                                       'assets/svg/home2.svg',
                                                       width: 20,
-                                                      color: Colors.white,
+                                                      color: Colors.black,
                                                     )),
                                                 SizedBox(
                                                   width: 5,
@@ -374,14 +377,14 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                                                 Text(
                                                   'Home',
                                                   style: TextStyle(
-                                                      color: Colors.white,
+                                                      color: Colors.black,
                                                       fontFamily: 'QuickSand',
                                                       fontSize: 14,
                                                       fontWeight:
                                                           FontWeight.w600),
                                                 ),
                                                 Radio(
-                                                    activeColor: Colors.white,
+                                                    activeColor: Colors.black,
                                                     value: 'home',
                                                     groupValue: addressType,
                                                     onChanged: (val) {
@@ -396,7 +399,11 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                                             height: 40,
                                             margin: EdgeInsets.only(right: 10),
                                             decoration: BoxDecoration(
-                                                color: kPinkColor,
+                                                border: Border.all(
+                                                  color: kBlackColor,
+                                                  width: 0.5,
+                                                ),
+                                                color: kWhiteColor,
                                                 borderRadius:
                                                     BorderRadius.circular(5)),
                                             child: Row(
@@ -408,7 +415,7 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                                                     child: SvgPicture.asset(
                                                       'assets/svg/work.svg',
                                                       width: 20,
-                                                      color: Colors.white,
+                                                      color: Colors.black,
                                                     )),
                                                 SizedBox(
                                                   width: 5,
@@ -416,7 +423,7 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                                                 Text(
                                                   'Work',
                                                   style: TextStyle(
-                                                      color: Colors.white,
+                                                      color: Colors.black,
                                                       fontFamily: 'QuickSand',
                                                       fontSize: 14,
                                                       fontWeight:
@@ -450,7 +457,7 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                         Expanded(
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                                primary: kPinkColor,
+                                primary: Colors.black54,
                                 elevation: 0,
                                 padding: EdgeInsets.all(13)),
                             onPressed: loading
@@ -493,7 +500,7 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                 Container(
                   // constraints: BoxConstraints.tight(Size(30, 30)),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(40),
                     color: Colors.white,
                   ),
                   child: IconButton(
@@ -507,49 +514,49 @@ class _MapScreenState extends State<MapScreen> with TickerProviderStateMixin {
                     iconSize: 16,
                   ),
                 ),
-                SizedBox(
-                  width: 10,
-                ),
-                Container(
-                  width: 340,
-                  height: 50,
-                  // constraints: BoxConstraints.tight(Size(30, 30)),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: kWhiteColor,
-                  ),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => MapSearch()));
-                    },
-                    child: TextField(
-                      enabled: false,
-                      autofocus: false,
-                      // focusNode: false,
+                // SizedBox(
+                //   width: 10,
+                // ),
+                // Container(
+                //   width: 340,
+                //   height: 50,
+                //   // constraints: BoxConstraints.tight(Size(30, 30)),
+                //   decoration: BoxDecoration(
+                //     borderRadius: BorderRadius.circular(10),
+                //     color: kWhiteColor,
+                //   ),
+                //   child: GestureDetector(
+                //     onTap: () {
+                //       Navigator.pushReplacement(context,
+                //           MaterialPageRoute(builder: (context) => MapSearch()));
+                //     },
+                //     child: TextField(
+                //       enabled: false,
+                //       autofocus: false,
+                //       // focusNode: false,
 
-                      // controller: searchController,
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.only(left: 10),
-                        suffixIcon: Icon(
-                          Icons.search,
-                          color: kPinkColor,
-                        ),
-                        // filled: true,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide:
-                              BorderSide(width: 0, style: BorderStyle.none),
-                        ),
-                        hintText: 'Search for your location',
-                        hintStyle: kTextgrey,
-                      ),
-                      // onChanged: (val) {
-                      //   findPlace(val);
-                      // },
-                    ),
-                  ),
-                ),
+                //       // controller: searchController,
+                //       decoration: InputDecoration(
+                //         contentPadding: EdgeInsets.only(left: 10),
+                //         suffixIcon: Icon(
+                //           Icons.search,
+                //           color: kPinkColor,
+                //         ),
+                //         // filled: true,
+                //         border: OutlineInputBorder(
+                //           borderRadius: BorderRadius.circular(10),
+                //           borderSide:
+                //               BorderSide(width: 0, style: BorderStyle.none),
+                //         ),
+                //         hintText: 'Search for your location',
+                //         hintStyle: kTextgrey,
+                //       ),
+                //       // onChanged: (val) {
+                //       //   findPlace(val);
+                //       // },
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ),

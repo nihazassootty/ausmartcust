@@ -9,7 +9,7 @@ import 'package:ausmart/Commons/TextStyles.dart';
 import 'package:ausmart/Commons/zerostate.dart';
 import 'package:ausmart/Providers/GetDataProvider.dart';
 import 'package:ausmart/Providers/StoreProvider.dart';
-import 'package:ausmart/Screens/App/Address.dart';
+import 'package:ausmart/Screens/App/MapScreen.dart';
 import 'package:provider/provider.dart';
 
 class SavedPage extends StatefulWidget {
@@ -98,28 +98,28 @@ class _SavedPageState extends State<SavedPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: kPinkColor,
+        backgroundColor: kWhiteColor,
         centerTitle: true,
         elevation: 0,
         leading: IconButton(
           onPressed: () => Navigator.of(context).pop(),
           icon: Icon(Icons.arrow_back_rounded),
-          color: Colors.white,
+          color: Colors.black,
         ),
         title: const Text(
           'Saved Address',
-          // style: kHeadTitleSmall,
+          style: Text16black,
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pushReplacement(
+          Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => MapScreen()),
           );
         },
         child: Icon(Icons.add),
-        backgroundColor: kPinkColor,
+        backgroundColor: Colors.green,
         tooltip: 'Add Address',
       ),
       resizeToAvoidBottomInset: false,
@@ -134,21 +134,27 @@ class _SavedPageState extends State<SavedPage> {
               horizontalTitleGap: 5,
               title: Text(
                 'Current Location',
-                style: Text18Pink,
+                style: kNavBarTitle1,
               ),
               subtitle: Container(
                 child: Text(
                   'Use your current location for delivery.',
-                  style: kText143,
+                  style: kText10,
                 ),
               ),
-              leading: SizedBox(
-                child: SvgPicture.asset(
-                  'assets/svg/gps.svg',
-                  width: 20,
-                  height: 20,
-                  color: kPinkColor,
+              leading: Container(
+                height: 40,
+                width: 40,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.green,
                 ),
+                child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Icon(
+                      Icons.gps_fixed,
+                      color: kWhiteColor,
+                    )),
               ),
             ),
             Row(
@@ -157,7 +163,7 @@ class _SavedPageState extends State<SavedPage> {
                   child: new Container(
                     margin: const EdgeInsets.only(right: 15.0),
                     child: Divider(
-                      color: kPinkColor,
+                      color: kGreyLight,
                       height: 30,
                     ),
                   ),
@@ -169,7 +175,7 @@ class _SavedPageState extends State<SavedPage> {
                       left: 15.0,
                     ),
                     child: Divider(
-                      color: kPinkColor,
+                      color: kGreyLight,
                       height: 30,
                     ),
                   ),
@@ -188,9 +194,17 @@ class _SavedPageState extends State<SavedPage> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Saved Address', style: Text18Pink),
-                              Text('Select Saved Delivery Address',
-                                  style: kText143),
+                              Text(
+                                'Saved Address',
+                                style: Text18,
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                'Select Saved Delivery Address',
+                                style: kText143,
+                              ),
                             ],
                           ),
                         ),
@@ -204,15 +218,26 @@ class _SavedPageState extends State<SavedPage> {
                             scrollDirection: Axis.vertical,
                             itemBuilder: (context, index) {
                               var address = data.get.customer.address[index];
-                              return Column(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  ListTile(
-                                    onTap: () => _selectLocation(address),
-                                    enableFeedback: true,
-                                    horizontalTitleGap: 5,
-                                    trailing: IconButton(
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 5),
+                                child: Container(
+                                  height: 100,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    border: Border.all(
+                                      color: kGreyLight,
+                                      width: 0.5,
+                                    ),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 15),
+                                    child: ListTile(
+                                      onTap: () => _selectLocation(address),
+                                      enableFeedback: true,
+                                      horizontalTitleGap: 10,
+                                      trailing: IconButton(
                                         onPressed: () {
                                           Provider.of<GetDataProvider>(context,
                                                   listen: false)
@@ -222,38 +247,40 @@ class _SavedPageState extends State<SavedPage> {
                                         icon: Icon(
                                           Icons.close_rounded,
                                           color: Colors.red[900],
-                                        )),
-                                    title: Text(
-                                      address["address"],
-                                      style: kNavBarTitle,
-                                    ),
-                                    subtitle: Text(
-                                      address["formattedAddress"],
-                                      maxLines: 3,
-                                      style: kText143,
-                                    ),
-                                    leading: Container(
-                                      decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          border: Border.all(
-                                              width: 0.5, color: kGreyLight)),
-                                      child: CircleAvatar(
-                                        backgroundColor: Colors.white,
-                                        radius: 35,
-                                        child: SvgPicture.asset(
-                                          address["addressType"] == 'work'
-                                              ? "assets/svg/work.svg"
-                                              : "assets/svg/home2.svg",
-                                          height: 25,
-                                          width: 25,
+                                        ),
+                                      ),
+                                      title: Text(
+                                        address["address"],
+                                        style: kNavBarTitle,
+                                      ),
+                                      subtitle: Text(
+                                        address["formattedAddress"],
+                                        maxLines: 3,
+                                        style: kText143,
+                                      ),
+                                      leading: Container(
+                                        height: 40,
+                                        width: 40,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          color: Colors.black,
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: SvgPicture.asset(
+                                            address["addressType"] == 'work'
+                                                ? "assets/svg/work.svg"
+                                                : "assets/svg/home2.svg",
+                                            height: 25,
+                                            width: 25,
+                                            color: kWhiteColor,
+                                          ),
                                         ),
                                       ),
                                     ),
                                   ),
-                                  Divider(
-                                    color: kPinkColor,
-                                  )
-                                ],
+                                ),
                               );
                             }),
                       ]
